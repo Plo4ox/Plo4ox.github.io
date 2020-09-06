@@ -1,0 +1,297 @@
+<html>
+  <head>
+    <title>(Unofficial) Artlist x Artgrid Edit Challenge Video 2020</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="#AGeditchallenge video for argrid x artlist">
+    <meta name="description" content="List of all the video posted for the #AGeditchallenge 2020">
+    <link rel="shortcut icon" href="https://www.plo4ox.com/tmp-project/AGeditchallenge2020/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://www.plo4ox.com/tmp-project/AGeditchallenge2020/favicon.ico" type="image/x-icon">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="plo4ox.com">
+    <meta name="twitter:title" content="(UNOFFICIAL) Artlist x Artgrid Edit Challenge Video 2020">
+    <meta name="twitter:description" content="List of all the #AGeditchallenge 2020 entries">
+    <meta name="twitter:creator" content="@plo4ox">
+    <meta name="twitter:image" content="https://www.plo4ox.com/tmp-project/AGeditchallenge2020/TwitterBanner.png">
+
+    <!-- OpenGl meta data -->
+    <meta property="og:url" content="https://www.plo4ox.com/tmp-project/AGeditchallenge2020/">
+    <meta property="og:title" content="(UNOFFICIAL) Artlist x Artgrid Edit Challenge Video 2020">
+    <meta property="og:image" content="https://www.plo4ox.com/tmp-project/AGeditchallenge2020/TwitterBanner.png">
+    <meta property="og:description" content="List of all the #AGeditchallenge 2020 entries">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://www.plo4ox.com/tmp-project/AGeditchallenge2020/style.css">
+  </head>
+  <body>
+    <!-- Header description -->
+    <div class="topHeader">
+      #AGeditchallenge (UNOFFICIAL)
+    </div>
+    <div class="description">
+      This is an unofficial website gathering all entries<br />
+      to the <a href="https://artgrid.io/lp/EditChallenge" target="_blank">the Artlist x Artgrid Challenge (2020).</a><br />
+      The website <a href="https://www.plo4ox.com/tmp-project/AGeditchallenge2020/database.json" target="_blank">data</a> are updated every 4 hours.<br />
+     <span class="next-update">Loading...</span>
+    </div>
+
+    <div class="content">
+      <!-- Theme links -->
+      <div class="links row">
+        <div class="col s4 theme-link">
+          <a href="#" id="trailer-theme" class="selected">0 Movie Trailers</a>
+        </div>
+        <div class="col s4 theme-link">
+          <a href="#" id="ad-theme" >0 Ads</a>
+        </div>
+        <div class="col s4 theme-link">
+          <a href="#" id="music-theme">0 Music Videos</a>
+        </div>
+      </div>
+
+      <!-- Sort options -->
+      <div class="sort-bar row">
+        <div class="col m2 s11">
+          <select>
+            <option value="0" selected>Newest</option>
+            <option value="1">Sort by Likes</option>
+            <option value="2">Sort by Views</option>
+          </select>
+        </div>
+        <div class="order col m1 s1">
+          <svg height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="up"><path d="M 3 3 L 3 5 L 14 5 L 14 3 L 3 3 z M 17 3 L 17 17 L 14 17 L 18 21 L 22 17 L 19 17 L 19 3 L 17 3 z M 3 7 L 3 9 L 12 9 L 12 7 L 3 7 z M 3 11 L 3 13 L 10 13 L 10 11 L 3 11 z M 3 15 L 3 17 L 8 17 L 8 15 L 3 15 z M 3 19 L 3 21 L 6 21 L 6 19 L 3 19 z"></path></svg>
+          <svg height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="down" style="display: none;"><path d="M 3 3 L 3 5 L 6 5 L 6 3 L 3 3 z M 17 3 L 17 17 L 14 17 L 18 21 L 22 17 L 19 17 L 19 3 L 17 3 z M 3 7 L 3 9 L 8 9 L 8 7 L 3 7 z M 3 11 L 3 13 L 10 13 L 10 11 L 3 11 z M 3 15 L 3 17 L 12 17 L 12 15 L 3 15 z M 3 19 L 3 21 L 14 21 L 14 19 L 3 19 z"></path></svg>
+        </div>
+        <div class="col m9 s0"></div>
+      </div>
+
+      <!-- All the videos -->
+      <div id="video-grid" class="row"></div>
+
+      <!-- Youtube player overlay -->
+      <div class="overlay-video">
+        <div class="videoWrapperExt">
+            <div class="videoWrapper">
+    					<div class="close"></div>
+              <iframe id="player" width="853" height="480" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+          jQuery(document).ready(function() {
+
+            /**
+             * Object containing all the data
+             * Check the https://www.plo4ox.com/tmp-project/database.json to have the different properties
+             */
+            var database;
+
+            /** Currently selected theme, the Trailer is selected by default */
+            var selectedTheme = "trailer-theme";
+
+            /** Currently selected filter, the date is selected by default */
+            var selectedFilter = 0;
+
+            /** True if the videos have an ascending order false otherwise */
+            var currentOrder = true;
+
+            /** Whether the device is a mobile or not */
+            var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // Setup the select of Materialize
+            $('select').formSelect();
+
+            // Avoid caching the getJSON result to handle the updates
+            $.ajaxSetup({ cache: false });
+
+            // Load the data
+            loadData();
+
+            /** Used to load the data from the json file to the database variable */
+            function loadData() {
+              $.getJSON(
+                "https://www.plo4ox.com/tmp-project/AGeditchallenge2020/database.json",
+                function(json) {
+                    if (database == null || database.LastUpdate != json.LastUpdate) {
+                      database = json;
+                      updateGrid();
+                      $("#trailer-theme").html(json.Theme.Trailer.Date.length + " Movie Trailers");
+                      $("#ad-theme").html(json.Theme.Ad.Date.length + " Ads");
+                      $("#music-theme").html(json.Theme.MusicClip.Date.length + " Music Videos");
+                    }
+                    countdownTimeStart();
+              });
+            }
+
+            /**
+             * Open the youtube launcher on a video click
+             * Code from: https://codepen.io/rafszul/pen/zgmVwJ
+             */
+            $("#video-grid").on("click", ".column img", function(e) {
+              e.preventDefault();
+              var identifier = $(this).parent().attr("id");
+              if (isMobile) {
+                window.location.href = "https://www.youtube.com/watch?v=" + identifier;
+              } else {
+                var src = "https://www.youtube.com/embed/" + identifier;
+                $(".overlay-video").show();
+                setTimeout(function() {
+                  $(".overlay-video").addClass("o1");
+                  $("#player").attr("src", src);
+                }, 100);
+              }
+            });
+
+            /**
+             * Close the youtube player overlay when clicking outside of it
+             * Code from: https://codepen.io/rafszul/pen/zgmVwJ
+             */
+            $(".overlay-video").click(function(event) {
+            	if (!$(event.target).closest(".videoWrapperExt").length) {
+            		var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+            		$("#player").attr("src", PlayingVideoSrc);
+            		$(".overlay-video").removeClass("o1");
+            		setTimeout(function() {
+            			$(".overlay-video").hide();
+            		}, 600);
+            	}
+            });
+
+            /**
+             * Close the youtube player overlay on the cross click
+             * Code from: https://codepen.io/rafszul/pen/zgmVwJ
+             */
+            $(".close").click(function(event) {
+            		var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+            		$("#player").attr("src", PlayingVideoSrc);
+            		$(".overlay-video").removeClass("o1");
+            		setTimeout(function() {
+            			$(".overlay-video").hide();
+            		}, 600);
+
+            });
+
+            /** Update the selected theme and update the grid */
+            $(".links a").click(function() {
+              selectedTheme = $(this).attr('id');
+              $('.links a.selected').removeClass('selected');
+              $(this).addClass('selected');
+              updateGrid();
+            });
+
+            /** Update the selected filter and update the grid */
+            $('select').on('change', function() {
+              selectedFilter = this.value;
+              updateGrid();
+            });
+
+            /** Toggle the current order and update the grid */
+            $('.order').click(function() {
+              currentOrder = !currentOrder;
+              $('#up').toggle();
+              $('#down').toggle();
+              updateGrid();
+            });
+
+            /** Return the current selected theme object from the database */
+            function theme() {
+              if (selectedTheme == "trailer-theme") {
+                return database.Theme.Trailer;
+              } else if (selectedTheme == "ad-theme") {
+                return database.Theme.Ad;
+              }
+              return database.Theme.MusicClip;
+            }
+
+            /** Return a list of video ids based on the selected theme and filter */
+            function videoIds() {
+              var themeData = theme()
+              if (selectedFilter == 0) {
+                return themeData.Date;
+              } else if (selectedFilter == 1) {
+                return themeData.Like;
+              }
+              return themeData.View;
+            }
+
+            /** Update the video grid based on the selected filters */
+            function updateGrid() {
+              // duplicate the video ids
+              var videoIdentifiers = videoIds().slice()
+
+              // then reverse it if needed
+              if (currentOrder) { videoIdentifiers.reverse() }
+
+              // then clear all the video-grid and append a new div for each video
+              $("#video-grid").fadeOut(250, function() {
+                 $(this).empty();
+                 for (var key in videoIdentifiers) {
+                   var identifier = videoIdentifiers[key];
+                   var video = database.Video[identifier];
+                   var date = new Date(video.PublishedDate).toLocaleString();
+                   var detailsDisplay = "none";
+                   if (isMobile) { detailsDisplay = "block"; }
+                   $(this).append(
+                     "<div id=" + identifier + " class='video column'>" +
+                     "<img src='" + video.ThumbnailUrl + "' /><div style='position: absolute; bottom: 1px; left: 0; width: 100%;'>" +
+                     "<div id='details-" + identifier + "' class='details' style='display: " + detailsDisplay + ";'>" +
+                     "<div class='title'>" + video.Title + "</div>" +
+                     "<div class='author'>By " + video.ChannelTitle + "</div>" +
+                     "<div class='likes-views'>" + video.NbLike + " likes | " + video.NbViews + " views | " + date + "</div>" +
+                     "</div></div>");
+                 }
+                 if (!isMobile) {
+                   $('.video').hover(function() {
+                     var id = "#details-" + $(this).attr('id');
+                     $(id).fadeIn(500);
+                   }, function() {
+                     var id = "#details-" + $(this).attr('id');
+                     $(id).hide();
+                   });
+                 }
+
+                 $(this).fadeIn(500);
+              });
+            }
+
+            /** Start a countdown to indicate when the next update will be */
+            function countdownTimeStart() {
+              var endChallenge = 1602194400000;
+              var fourHours = 14400000;
+              var countDownDate = new Date(database.LastUpdate).getTime() + fourHours;
+
+              if (new Date().getTime() > endChallenge) {
+                $(".next-update").html("THE CHALLENGE IS OVER :)");
+                return
+              }
+
+              var interval = setInterval(function() {
+                  var now = new Date().getTime() - 60000;
+                  var distance = countDownDate - now;
+
+                  var hours = Math.floor((distance % (86400000)) / (3600000));
+                  var minutes = Math.floor((distance % (3600000)) / (60000));
+                  var seconds = Math.floor((distance % (60000)) / 1000);
+
+                  $(".next-update").html("Next update in<b> " + hours + "h " + minutes + "m " + seconds + "s </b>");
+                  if (distance < 0) {
+                    $(".next-update").html("The update is in progress...");
+                  }
+                  if (distance < -2000) {
+                    clearInterval(interval);
+                    loadData()
+                  }
+              }, 1000);
+            }
+          });
+    </script>
+  </body>
+</html>
