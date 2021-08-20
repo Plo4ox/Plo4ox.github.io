@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>(Unofficial) Citizens of Bulliever Island</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="#COBI #BullieverForever">
+    <meta name="description" content="List of all Citizens of Bulliever Island">
+    <link rel="shortcut icon" href="https://www.plo4ox.com/tmp-project/Bullievers2021/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://www.plo4ox.com/tmp-project/Bullievers2021/favicon.ico" type="image/x-icon">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="plo4ox.com">
+    <meta name="twitter:title" content="(Unofficial) Citizens of Bulliever Island">
+    <meta name="twitter:description" content="List of all Citizens of Bulliever Island">
+    <meta name="twitter:creator" content="@crypt4ox">
+    <meta name="twitter:image" content="https://www.plo4ox.com/tmp-project/Bullievers2021/TwitterBanner.png">
+
+    <!-- OpenGl meta data -->
+    <meta property="og:url" content="https://www.plo4ox.com/tmp-project/Bullievers2021/">
+    <meta property="og:title" content="(Unofficial) Citizens of Bulliever Island">
+    <meta property="og:image" content="https://www.plo4ox.com/tmp-project/Bullievers2021/TwitterBanner.png">
+    <meta property="og:description" content="List of all Citizens of Bulliever Island">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="content" class="squaregrid" />
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+          jQuery(document).ready(function() {
+            /**
+             * Object containing all the citizens image urls
+             * Check the https://www.plo4ox.com/tmp-project/bulliever_image_urls.json to have the different properties
+             */
+            var database;
+
+            // Load the data
+            loadData();
+
+            /** Used to load the data from the json file to the database variable */
+            function loadData() {
+              $.getJSON(
+                "https://www.plo4ox.com/tmp-project/Bullievers2021/bulliever_image_urls.json",
+                function(json) {
+                    if (database == null) {
+                      database = json;
+                      updateGrid();
+                    }
+              });
+            }
+
+            /** Update the image grid */
+            function updateGrid() {
+              for (var key in database) {
+                $("#content").append("<img src='" + database[key]["image_preview_url"] + "' />");
+              }
+            }
+          });
+    </script>
+  </body>
+</html>

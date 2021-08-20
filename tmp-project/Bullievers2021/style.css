@@ -1,0 +1,16 @@
+html {
+ zoom: 0.1;
+}
+
+body {
+  background: #171717;
+  max-width: 25000px;
+  margin: auto;
+}
+
+.squaregrid {
+    width: 25000px;
+    height: 25000px;
+    display: grid;
+    grid-template: repeat(100, 1fr) / repeat(100, 1fr);
+}
