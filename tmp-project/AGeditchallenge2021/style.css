@@ -1,0 +1,278 @@
+body {
+  background: #171717;
+  font-family: 'Raleway', 'Noto Sans JP', sans-serif;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.description {
+  color: #c6c6c6;
+  text-align: center;
+  width: 100%;
+  padding: 0 32px;
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+.content {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.topHeader {
+  padding: 3vh 2vw;
+  background-image: linear-gradient(to bottom, #000000 -62%, rgba(0, 0, 0, 0) 73%), linear-gradient(to bottom, #171717, #171717);
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 32px;
+}
+
+a {
+  color: #7c7c7c;
+  padding-bottom: 2px;
+}
+
+a:hover {
+  color: #00d3b9;
+  border-bottom: 1px solid #00d3b9;
+}
+
+a:visited {
+  color: #00d3b9;
+}
+
+.theme-link {
+  text-align: center;
+}
+
+.theme-link a {
+  color: #7c7c7c;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+}
+
+.theme-link a:hover {
+  color: #00d3b9;
+  border-bottom: 1px solid #00d3b9;
+}
+
+.theme-link a.selected {
+  color: #00d3b9;
+  border-bottom: 1px solid #00d3b9;
+}
+
+.video {
+  position: relative;
+}
+
+.details {
+  position: relative;
+  width: 95%;
+  padding: 4px 4px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 12px;
+}
+
+.details .title {
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.details .author {
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #cecece;
+}
+
+.details .likes-views {
+  font-size: 12px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.content .select-wrapper input.select-dropdown {
+  color: #fff;
+  font-size: 16px;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+  color: #fff;
+  font-size: 16px;
+}
+.dropdown-content li>a, .dropdown-content li>span:hover {
+  color: #00d3b9;
+  font-size: 16px;
+}
+.select-wrapper .caret {
+  fill: #c6c6c6;
+}
+
+.dropdown-content {
+  background: #171717;
+}
+
+.order {
+  max-height: 32px;
+  max-width: 32px;
+  margin-top: 12px;
+}
+
+.order svg {
+  bottom: 0;
+  fill: #c6c6c6;
+}
+.order svg:hover {
+  fill: #00d3b9;
+}
+
+.sort-bar {
+  margin-bottom: 0px;
+  padding: 0px 8px;
+}
+
+.sort-bar .row {
+  margin-right: 0px;
+}
+
+.sort-bar .col {
+  padding: 0px;
+}
+
+.row .col.m2.s11 {
+  margin-left: 0px;
+}
+
+.row .col.m1.s1 {
+  margin-left: 0px;
+}
+
+
+/* Handle the video grid, code from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_grid_responsive */
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.column img:hover {
+  border-radius:2px;
+  border: 1px solid #ccc;
+}
+
+@media screen and (max-width: 992px) {
+  .column {
+    -ms-flex: 33%; /* IE10 */
+    flex: 33%;
+    max-width: 33%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%; /* IE10 */
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+
+/** Handle the overlay youtube iframe, code from https://codepen.io/rafszul/pen/zgmVwJ */
+
+.overlay-video {
+  display: none;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  opacity: 0;
+  -ms-transition: opacity 600ms ease-in;
+  transition: opacity 600ms ease-in;
+  -ms-transition: opacity .6s;
+  transition: opacity .6s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, .7);
+  z-index: 999999;
+}
+
+.o1 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  opacity: 1;
+  -ms-transition: opacity 600ms ease-out;
+  transition: opacity 600ms ease-out;
+  -ms-transition: opacity .6s;
+  transition: opacity .6s;
+}
+
+.videoWrapperExt {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  max-width: 982px;
+  padding: 0 20px;
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.close {
+  background-image:url(https://www.plo4ox.com/tmp-project/AGeditchallenge2020/close_white.png);
+  position: absolute;
+  top: -50px;
+  right: 0px;
+  cursor: pointer;
+  z-index: 9999;
+  height: 40px;
+  width: 40px;
+  background-size: 40px;
+  @media (max-width: 767px) and (orientation: landscape) {
+    display: none;
+  }
+}
