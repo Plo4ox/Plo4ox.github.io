@@ -9,8 +9,10 @@ html {
 }
 
 body {
-    /* Thx to :: http://bg.siteorigin.com/ */
-    background: #3F51B5 url("../img/bg.png") repeat center center;
+    background: #000 url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     color: #FFFFFF;
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 1.7em;
@@ -18,6 +20,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
     font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
 }
 
 p {
@@ -25,7 +29,9 @@ p {
     font-size: 0.8em;
 }
 
-img { width: 100%; }
+img {
+  width: 100%;
+}
 
 a {
     color: #00BCD4;
@@ -34,168 +40,102 @@ a {
 }
 a:hover { font-weight: normal; }
 
-ul { list-style-type: none; }
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+li {
+  vertical-align: center;
+}
+
+#content {
+  padding: 32px;
+  border: 1px solid rgba(255,255,255,.2);
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+}
 
 #network-link {
-    margin-top: 16px;
-    position: absolute;
-    right: 2%;
-    top: 0px;
-    padding: 0px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
+
 #network-link li {
+  display: inline-block;
+  width: 42px;
+}
+
+li#dyor {
+  display: block;
+  font-size: 0.5em;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+#network-link img {
+  display: inline-block;
+  height: 42px;
+  object-fit: contain;
+}
+
+
+@media screen and (max-width: 470px) {
+  #network-link img {
     display: inline-block;
-    height: 40px;
-    width: 40px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  #network-link li {
+    display: inline-block;
+    width: 45%;
+  }
+
+  li#dyor {
+    display: block;
+    font-size: 0.5em;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 8px;
+  }
 }
 
-#contact-res a {
-    font-family: monospace;
-    font-size: 1.5em;
-    opacity: 1;
-}
-#contact-res .textarea {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    color: white;
-    font-weight: bold;
-    max-width: 400px;
-    outline: none;
-    resize: none;
+
+@media screen and (max-width: 360px) {
+  #network-link img {
+    display: inline-block;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  #network-link li {
+    display: inline-block;
+    width: 100%;
+  }
+
+  li#dyor {
+    display: block;
+    font-size: 0.5em;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 8px;
+  }
 }
 
-.grow	    { transition: all 0.2s ease-in-out; }
-.grow:hover { transform	: scale(1.2); }
-
-.animated-code { opacity: 0.8; }
-.code {
-    bottom: 2%;
-    font-size: 0.4em;
-    left: 1%;
-    position: absolute;
+.grow	    {
+  transition: all 0.2s ease-in-out;
+  opacity: 0.7;
 }
-
-/* Thx to http://tympanus.net/Tutorials/CSS3RotatingWords/index.html */
-.rw-wrapper {
-    margin: auto;
-    max-height: 300px;
-    max-width: 600px;
-    padding: 10px;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-}
-.rw-sentence {
-    margin: 0;
-    text-align: left;
- }
-.rw-sentence span { font-weight: normal; }
-.rw-words {
-    display: inline;
-    text-indent: 10px;
-}
-.rw-words-1 span {
-    position: absolute;
-    opacity: 0;
-    overflow: hidden;
-    color: #BBDEFB;
-    font-weight: bold;
-    -webkit-animation: rotateWord 18s linear infinite 0s;
-    -ms-animation: rotateWord 18s linear infinite 0s;
-    animation: rotateWord 18s linear infinite 0s;
-}
-.rw-words-1 span:nth-child(2) {
-    -webkit-animation-delay: 3s;
-    -ms-animation-delay: 3s;
-    animation-delay: 3s;
-}
-.rw-words-1 span:nth-child(3) {
-    -webkit-animation-delay: 6s;
-    -ms-animation-delay: 6s;
-    animation-delay: 6s;
-}
-.rw-words-1 span:nth-child(4) {
-    -webkit-animation-delay: 9s;
-    -ms-animation-delay: 9s;
-    animation-delay: 9s;
-}
-.rw-words-1 span:nth-child(5) {
-    -webkit-animation-delay: 12s;
-    -ms-animation-delay: 12s;
-    animation-delay: 12s;
-}
-.rw-words-1 span:nth-child(6) {
-    -webkit-animation-delay: 15s;
-    -ms-animation-delay: 15s;
-    animation-delay: 15s;
-}
-@-webkit-keyframes rotateWord {
-    0% { opacity: 0; }
-    2% { opacity: 0; -webkit-transform: translateY(-30px); }
-    5% { opacity: 1; -webkit-transform: translateY(0px);}
-    17% { opacity: 1; -webkit-transform: translateY(0px); }
-    20% { opacity: 0; -webkit-transform: translateY(30px); }
-    80% { opacity: 0; }
-    100% { opacity: 0; }
-}
-@-ms-keyframes rotateWord {
-    0% { opacity: 0; }
-    2% { opacity: 0; -ms-transform: translateY(-30px); }
-    5% { opacity: 1; -ms-transform: translateY(0px);}
-    17% { opacity: 1; -ms-transform: translateY(0px); }
-    20% { opacity: 0; -ms-transform: translateY(30px); }
-    80% { opacity: 0; }
-    100% { opacity: 0; }
-}
-@keyframes rotateWord {
-    0% { opacity: 0; }
-    2% { opacity: 0; -webkit-transform: translateY(-30px); transform: translateY(-30px); }
-    5% { opacity: 1; -webkit-transform: translateY(0px); transform: translateY(0px);}
-    17% { opacity: 1; -webkit-transform: translateY(0px); transform: translateY(0px); }
-    20% { opacity: 0; -webkit-transform: translateY(30px); transform: translateY(30px); }
-    80% { opacity: 0; }
-    100% { opacity: 0; }
-}
-@media screen and (max-width: 768px) {
-    .rw-sentence { font-size: 1em; }
-    #network-link li {
-	display : inline-block;
-	height  : 45px;
-	width   : 45px;
-    }
-}
-
-/* Thx to http://www.mattboldt.com/demos/typed-js/ */
-.typed-cursor {
-    opacity: 1;
-    font-weight: 100;
-    -webkit-animation: blink 0.7s infinite;
-    -moz-animation: blink 0.7s infinite;
-    -ms-animation: blink 0.7s infinite;
-    -o-animation: blink 0.7s infinite;
-    animation: blink 0.7s infinite;
-}
-@-keyframes blink {
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
-}
-@-webkit-keyframes blink {
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
-}
-@-moz-keyframes blink {
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
-}
-@-ms-keyframes blink {
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
-}
-@-o-keyframes blink {
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+.grow:hover {
+  transform	: scale(1.4);
+  opacity: 1;
 }
