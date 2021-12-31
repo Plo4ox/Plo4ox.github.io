@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>(Unofficial) Bylo Claim</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <meta name="keywords" content="Unofficial Bylo Claim">
+    <meta name="description" content="Claim ETH rewards">
+    <link rel="shortcut icon" href="https://www.plo4ox.com/tmp-project/ByloClaim2021/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://www.plo4ox.com/tmp-project/ByloClaim2021/favicon.ico" type="image/x-icon">
+
+    <!-- Roboto Font -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- CSS -->
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+    <!-- Web3 js library -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="warning">UNOFFICIAL CLAIM</div>
+
+      <!-- Loading view -->
+      <img id="loading" src="img/bylo_icon.png" alt="Bylo icon" style="display: none">
+
+      <!-- Error show when non web3 browser is used -->
+      <div id="error" style="display: none">Non-Ethereum browser detected. You should consider trying MetaMask and reloading this page ;)</div>
+
+      <!-- Connect view used to connect the user wallet to the website -->
+      <div id="connect-wallet-container" style="display: none">
+        <a id="bylo-link" href="https://bylowallet.com/" class="center-horizontal">
+          <img src="img/bylo_icon.png" alt="Bylo icon">
+        </a>
+        <p>UNOFFICIAL APP<br/>Claim BYLO unpaid earnings by connecting your Metamask wallet</p>
+        <a id="connect-btn" href="javascript:void(0)" class="center-horizontal">
+          <div class="btn_progress"></div>
+          Connect Wallet
+        </a>
+      </div>
+
+      <!-- Claim view used to present account data and allow the user to claim the ETH -->
+      <div id="claim-dividend-container" style="display: none">
+        <div id="header-container">
+          <a id="bylo-link" href="https://bylowallet.com/">
+            <img src="img/bylo_icon.png" alt="Bylo icon">
+          </a>
+          <div id="account-container">
+            <span id="account-address"></span>
+            <a id="etherscan-btn" href="javascript:void(0)">
+              <svg id="account-icon" width="35" height="35" data-jdenticon-value="" />
+            </a>
+          </div>
+        </div>
+        <h3>TOTAL VALUE</h3>
+        <h4 id="bylo-balance"></h4>
+        <h5 id="bylo-balance-dollars"></h5>
+        <h3>ETH EARNED</h3>
+        <h4 id="eth-earned"></h4>
+        <h5 id="eth-earned-dollars"></h5>
+        <a id="claim-btn" href="javascript:void(0)" class="center-horizontal">
+          <div class="btn_progress"></div>
+          Claim
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <span>© 2021 Unofficial BYLO Claim v0.0.0.1 - Plo4ox</span>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.1.1/dist/jdenticon.min.js" async
+    integrity="sha384-l0/0sn63N3mskDgRYJZA6Mogihu0VY3CusdLMiwpJ9LFPklOARUcOiWEIGGmFELx"
+    crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
