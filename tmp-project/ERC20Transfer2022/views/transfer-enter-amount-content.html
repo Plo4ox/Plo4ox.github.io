@@ -1,0 +1,38 @@
+<div class="token-transfer-container">
+  <div id="account-address-container"></div>
+  <div id="transaction-etherscan-container" class="surface" style="display: none">
+    <a id="transfer-etherscan-link" class="row center" target="_blank" rel="noopener noreferrer">
+      <img src="img/etherscan_icon.png"></img>
+      <div class="col s10 transfer-info">
+        <p class="transfer-title">TRANSFERRING...</p>
+        <p class="transfer-hash">0x00</p>
+      </div>
+    </a>
+  </div>
+  <div id="transaction-amount-container" class="surface" style="display: none">
+    <div class="transfer-account-info">
+      <p class="transfer-account-direction">FROM</p>
+      <p id="fromAddr" class="transfer-account-addr">0x00</p>
+    </div>
+    <div class="transfer-amount">
+      <p class="transfer-amount-token">0</p>
+      <p class="transfer-amount-fiat">~ $0.00</p>
+    </div>
+    <div class="transfer-account-info">
+      <p class="transfer-account-direction">TO</p>
+      <p id="toAddr" class="transfer-account-addr">0x00</p>
+    </div>
+  </div>
+  <div id="account-balance-container" class="surface"></div>
+  <div id="amount-input" class="col s12 surface">
+    <p>ENTER THE AMOUNT OF TOKEN TO TRANSFER</p>
+    <input type="number" id="token-amount" name="token-amount" placeholder="0">
+    <p id="token-amount-fiat">(~ $0.00)</p>
+  </div>
+  <a id="transfer-button" href="javascript:void(0)" class="disabled">
+    <div class="stage" style="display: none">
+      <div class="dot-flashing"></div>
+    </div>
+    <span>CONNECT</span>
+  </a>
+</div>
