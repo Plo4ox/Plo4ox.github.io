@@ -103,14 +103,11 @@ jQuery(document).ready(function() {
 
   /** Get current Bylo price in usd */
   async function getByloPriceInUsd(ethPriceUsd) {
-    response = await fetch('https://api.allorigins.win/raw?url=https://www.dextools.io/chain-ethereum/api/uniswap/poolx?pairSelected=0x37059c5749d48eec9c049f707d311f068333ccb7')
+    response = await fetch('https://api.dexscreener.com/latest/dex/tokens/0xd1d348fe85c65de21b367abc71ede822751348fb')
     jsonData = await response.json()
-    oneByloPriceEth = jsonData.data.pair.reserve0 / jsonData.data.pair.reserve1
-    unitPrice = oneByloPriceEth * ethPriceUsd
+    unitPrice = jsonData.pairs[0].priceUsd
     console.log("Calculate BYLO price based on Coingecko eth price ($" + ethPriceUsd + ")")
-    console.log("And Uniswap pair:" + JSON.stringify(jsonData.data.pair))
     console.log("BYLO price $" + unitPrice)
-    console.log("BYLO price " + oneByloPriceEth.toFixed(10) + "Ξ")
     return unitPrice
   }
 
