@@ -1,7 +1,7 @@
 // The view related function are in the view.js file
 jQuery(document).ready(function() {
 
-  const VERSION = "v0.0.0.1"
+  const VERSION = "v0.0.0.2"
 
   // Set the version
   $("#version").html(VERSION);
@@ -84,7 +84,7 @@ jQuery(document).ready(function() {
     try {
       getDataB64 = new URLSearchParams(location.search).get("d")
       if (getDataB64 == "me") {
-        getDataB64 = "eyJ0eXBlIjogMSwgInJlY2VpdmVyIjogIjB4NGM1NTQwYjFjQTU1ZUZlNDg3ZjAyODU3NUI4YTg4MTZEYzM0ZDcwQSIsICJjb250cmFjdHMiOiBbeyJ0aXRsZSI6ICJLVU1BIiwgImFkZHIiOiAiMHg0OGMyNzZlOGQwMzgxMzIyNGJiMWU1NWY5NTNhZGI2ZDAyZmQzZTAyIiwgImljb25VcmwiOiAiaHR0cHM6Ly9hc3NldHMuY29pbmdlY2tvLmNvbS9jb2lucy9pbWFnZXMvMTU1MjYvbGFyZ2Uva3VtYV9pbnUuUE5HPzE2MjExMjg4MjQifSwgeyJ0aXRsZSI6ICJLQVdBIiwgImFkZHIiOiAiMHg1NDZBRUQzN2QyMDJkNjA3RjQ1Q2JkMmI4QzBDYUQwRDI1ZkJlMzM5IiwgImljb25VcmwiOiAiaHR0cHM6Ly9hc3NldHMuY29pbmdlY2tvLmNvbS9jb2lucy9pbWFnZXMvMTYzNjkvbGFyZ2Uva2F3YWludS5QTkc/MTYyMzgyMDgwNSJ9LCB7InRpdGxlIjogIklOQVJJIiwgImFkZHIiOiAiMHhjYTc1YzQzZjhjOWFmZDM1NmM1ODVjZTdhYTQ0OTBiNDhhOTVjNDY2IiwgImljb25VcmwiOiAiaHR0cHM6Ly9hc3NldHMuY29pbmdlY2tvLmNvbS9jb2lucy9pbWFnZXMvMTY3OTUvbGFyZ2UvdG9rZW5fbG9nb18lMjgxJTI5LnBuZz8xNjI1MDM2ODI4In0sIHsidGl0bGUiOiAiUExBWSIsICJhZGRyIjogIjB4OTViNGU0NzAyNTM3MkRlZDRCNzNGOWI1RjA2NzFCOTRhODE0NDViQyIsICJpY29uVXJsIjogImh0dHBzOi8vYXNzZXRzLmNvaW5nZWNrby5jb20vY29pbnMvaW1hZ2VzLzIxODA0L3NtYWxsL2lnLnBuZz8xNjQwMDY2MjE0In1dfQ=="
+        getDataB64 = "eyJ0eXBlIjogMSwgInJlY2VpdmVyIjogIjB4NGM1NTQwYjFjQTU1ZUZlNDg3ZjAyODU3NUI4YTg4MTZEYzM0ZDcwQSIsICJjb250cmFjdHMiOiBbeyJ0aXRsZSI6ICJLVU1BIiwgImFkZHIiOiAiMHg0OGMyNzZlOGQwMzgxMzIyNGJiMWU1NWY5NTNhZGI2ZDAyZmQzZTAyIiwgImljb25VcmwiOiAiaHR0cHM6Ly9hc3NldHMuY29pbmdlY2tvLmNvbS9jb2lucy9pbWFnZXMvMTU1MjYvbGFyZ2Uva3VtYV9pbnUuUE5HPzE2MjExMjg4MjQifSwgeyJ0aXRsZSI6ICJLQVdBIiwgImFkZHIiOiAiMHg1NTUyRTVhODlBNzBjQjJlRjVBZEJiQzQ1YTZCRTQ0MmZFNzE2MEVjIiwgImljb25VcmwiOiAiaHR0cHM6Ly9hc3NldHMuY29pbmdlY2tvLmNvbS9jb2lucy9pbWFnZXMvMTYzNjkvbGFyZ2Uva2F3YWludS5QTkc/MTYyMzgyMDgwNSJ9LCB7InRpdGxlIjogIkJZTE8iLCAiYWRkciI6ICIweGQxRDM0OEZFODVjNjVEZTIxQjM2N2FiYzcxRWRlODIyNzUxMzQ4ZkIiLCAiaWNvblVybCI6ICJodHRwczovL2J5bG93YWxsZXQuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIxLzEyL2Zhdmljb24ucG5nIn1dfQ=="
       }
       queryData = JSON.parse(atob(getDataB64))
       console.log("Loaded GET configuration: " + JSON.stringify(queryData))
@@ -345,6 +345,13 @@ jQuery(document).ready(function() {
     isLoadingContract = false
   }
 
+  /** Get current eth price in usd */
+  async function getEthPriceInUsd() {
+    response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd')
+    jsonData = await response.json()
+    return jsonData.ethereum.usd
+  }
+
   /** Load the current account balance for the given contractAddr */
   async function loadBalance(contractAddr) {
     // compute balance
@@ -353,10 +360,25 @@ jQuery(document).ready(function() {
     const amountBN = web3.utils.toBN(amount)
     const balance = amountBN / web3.utils.toBN(10).pow(decimals)
 
-    // get current price from coingecko API
-    response = await fetch('https://api.coingecko.com/api/v3/coins/ethereum/contract/' + contractAddr)
+    // get current price from uniswap api
+    response = await fetch("https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          "query": "query tokens($tokenAddress: Bytes\u0021) {\n  tokens(where: {id: $tokenAddress}) {\n    derivedETH\n    totalLiquidity\n  }\n}",
+          "variables": { "tokenAddress": contractAddr.toLowerCase() },
+          "extensions": { "headers":null }
+        }
+      )
+    });
     jsonData = await response.json()
-    currentUsdPrice = jsonData.market_data.current_price.usd
+    currentEthPrice = parseFloat(jsonData.data.tokens[0].derivedETH)
+    ethPriceInUsd = await getEthPriceInUsd()
+    currentUsdPrice = currentEthPrice * ethPriceInUsd
     currentPrice = balance * currentUsdPrice
 
     $("#account-balance .amount").html(balance.toFixed(2))
