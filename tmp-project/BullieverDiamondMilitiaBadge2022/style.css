@@ -1,0 +1,23 @@
+.diamondMilitiaPostPhotoBadge {
+  position: absolute;
+  z-index: 1000;
+  height: 20px;
+  width: 20px;
+  top: -2px;
+  left: -6px;
+  -webkit-border-radius: 99em;
+  border: 1px solid #000000;
+  background: white;
+}
+
+.diamondMilitiaHeaderPhotoBadge {
+  position: absolute;
+  z-index: 1000;
+  width: 42px;
+  height: 42px;
+  left: 0px;
+  top: -2px;
+  -webkit-border-radius: 99em;
+  border: 2px solid #000000;
+  background: white;
+}
