@@ -20,7 +20,7 @@ $(document).ready(function() {
   function showEndMsg(event) {
     if (event.which == 13) {
       var msg_fake_succeed = ":: <b>You seem interested by what I'm doing!</b>";
-      var end_msg = "<div>:: Don't forget to check my <a href='https://www.instagram.com/plo4ox/'>Instagram</a> ;)<br />" + prompt() + " exit";
+      var end_msg = "<div>:: Don't forget to check my <a href='https://medium.com/@plo4ox/list/projects-5fd0d8ca5e21'>Projects</a> ;)<br />" + prompt() + " exit";
       $("#type-something-res").html(msg_fake_succeed);
       $(".code").append(end_msg);
     }
