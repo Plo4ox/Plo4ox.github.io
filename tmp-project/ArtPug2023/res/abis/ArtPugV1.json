@@ -1,0 +1,790 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ContestCanceled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ContestEnded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewContest",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "contestId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "entryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewEntry",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "contestId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "entryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewVote",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_title",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_image",
+        "type": "string"
+      }
+    ],
+    "name": "addEntry",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "cancelContest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_title",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_banner",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_startDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_endDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_entryPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_particiationPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "createContest",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "endContest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "endOutdatedContests",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllContests",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "banner",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "participation",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "creation",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ArtPugV1.Price",
+            "name": "price",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "profits",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reward",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "ended",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct ArtPugV1.Contest[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getContest",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "banner",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "participation",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "creation",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ArtPugV1.Price",
+            "name": "price",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "profits",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reward",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "ended",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct ArtPugV1.Contest",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getEntriesFor",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "id",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nbVotes",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ArtPugV1.Entry[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMyContests",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "banner",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "participation",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "creation",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ArtPugV1.Price",
+            "name": "price",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "profits",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reward",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "ended",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct ArtPugV1.Contest[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMyRunningContest",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "banner",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "participation",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "creation",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct ArtPugV1.Price",
+            "name": "price",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "profits",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reward",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "ended",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct ArtPugV1.Contest",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getWinningEntryFor",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "id",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "nbVotes",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ArtPugV1.Entry",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "hasContestInProgress",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "hasEntryInContest",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_entryId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "hasVotedFor",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_participationPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_creationPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      }
+    ],
+    "name": "isContestInProgress",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "price",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "participation",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "creation",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "profits",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_participationPrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_creationPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPrice",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_contestId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_entryId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_comment",
+        "type": "string"
+      }
+    ],
+    "name": "voteOn",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawProfits",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
