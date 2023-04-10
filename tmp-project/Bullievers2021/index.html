@@ -27,40 +27,64 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div id="content" class="squaregrid" />
-
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-          jQuery(document).ready(function() {
-            /**
-             * Object containing all the citizens image urls
-             * Check the https://www.plo4ox.com/tmp-project/bulliever_image_urls.json to have the different properties
-             */
-            var database;
-
-            // Load the data
-            loadData();
-
-            /** Used to load the data from the json file to the database variable */
-            function loadData() {
-              $.getJSON(
-                "https://www.plo4ox.com/tmp-project/Bullievers2021/bulliever_image_urls.json",
-                function(json) {
-                    if (database == null) {
-                      database = json;
-                      updateGrid();
-                    }
-              });
-            }
-
-            /** Update the image grid */
-            function updateGrid() {
-              for (var key in database) {
-                $("#content").append("<img src='" + database[key]["image_preview_url"] + "' />");
-              }
-            }
-          });
-    </script>
+    <div id="openseadragon"></div>
   </body>
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="openseadragon.min.js"></script>
+  <script type="text/javascript">
+        jQuery(document).ready(function() {
+          /**
+           * Object containing all the citizens image id on the drive
+           * Check the https://www.plo4ox.com/tmp-project/Bullievers2021/bulliever_image_tiles.json to have the different properties
+           */
+          var tileIds;
+
+          // Load the data
+          loadData();
+
+          /** Used to load the data from the json file to the database variable */
+          function loadData() {
+            $.getJSON(
+              "https://www.plo4ox.com/tmp-project/Bullievers2021/bulliever_image_tiles.json",
+              function(json) {
+                  if (tileIds == null) {
+                    tileIds = json;
+                    updateGrid();
+                  }
+              }
+            )
+          }
+
+          /** Update the image grid */
+          function updateGrid() {
+            // Create OpenSeadragon viewer
+            var viewer = OpenSeadragon({
+                id: "openseadragon",
+                tileSources: {
+                  height: 51200,
+                  width: 51200,
+                  tileSize: 512,
+                  getTileUrl: function(level, x, y) {
+                    let id = tileIds[level][x][y];
+                    return "https://drive.google.com/uc?id=" + id;
+                  }
+                },
+                showFullPageControl: false,
+                showHomeControl: false,
+                showSequenceControl: false,
+                showNavigator: false,
+                showZoomControl: false,
+                showRotationControl: false,
+                showFlipControl: false,
+                showFullScreenControl: false,
+                showReferenceStrip: false,
+                showRotationControl: false,
+                showFlipControl: false,
+                showRotationControl: false,
+                showFlipControl: false
+            });
+          }
+        });
+  </script>
 </html>
